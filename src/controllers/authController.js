@@ -130,7 +130,7 @@ export const login = async (req, res) => {
     const token = await createToken(verifyUser._id);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       maxAge: 5 * 60 * 60 * 1000,
     });
 
