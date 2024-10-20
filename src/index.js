@@ -23,7 +23,7 @@ app.use(
 app.use(cookieParser());
 
 // for parse json / url encoded data
-app.use(express());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // create server
