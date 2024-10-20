@@ -1,4 +1,4 @@
-
+import constant from "../config/constant.js";
 import userModel from "../models/userModel.js";
 import { comparePassword, encryptPassword } from "../utils/ecryptPassword.js";
 import { createToken } from "../utils/generateToken.js";
@@ -130,7 +130,7 @@ export const login = async (req, res) => {
     const token = await createToken(verifyUser._id);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       maxAge: 5 * 60 * 60 * 1000,
     });
 
@@ -184,7 +184,6 @@ export const logout = async (req, res) => {
       message: "Logout successfully.",
       success: true,
     });
-    
   } catch (error) {
     return res.status(500).json({
       message: "Internal Server Error!",
